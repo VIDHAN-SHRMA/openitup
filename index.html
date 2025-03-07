@@ -3,70 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
+    <title>One Month Together</title>
     <style>
         body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
+            height: 100vh;
+            text-align: center;
         }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+        }
+
         h1 {
+            color: #ff6f61;
             font-size: 2.5rem;
         }
-        #buttons {
-            margin-top: 20px;
+
+        p {
+            font-size: 1.2rem;
+            color: #555555;
+            line-height: 1.6;
         }
-        .btn {
-            font-size: 20px;
-            padding: 10px 20px;
-            margin: 10px;
+
+        .heart {
+            font-size: 4rem;
+            color: #ff6f61;
+            margin: 20px 0;
+        }
+
+        .button {
+            background-color: #ff6f61;
+            color: #ffffff;
+            font-size: 1.2rem;
+            padding: 12px 20px;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        #yes {
-            background-color: #ff4d4d;
-            color: white;
-        }
-        #no {
-            background-color: #333;
-            color: white;
-        }
-        #no:hover {
-            background-color: red;
-        }
-        #message {
-            display: none;
-            font-size: 2rem;
-            color: red;
+            text-decoration: none;
+            display: inline-block;
             margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #e55f56;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #yes-btn {
+            width: 200px;
+            height: 50px;
         }
     </style>
 </head>
-<body style="background: url('OIP.jpg') no-repeat center center/cover;">
-    <h1>Will you be my Valentine? 💖</h1>
-    <div id="buttons">
-        <button id="yes" class="btn" onclick="showLove()">Yes</button>
-        <button id="no" class="btn" onclick="growYes()">No</button>
+<body>
+    <!-- Screen 2: Yes/No options -->
+    <div class="container" id="screen2">
+        <h1>Are you ready for a surprise?</h1>
+        <p>Choose your answer, my love:</p>
+        <button class="button" id="noBtn">No</button>
+        <button class="button" id="yesBtn">Yes</button>
     </div>
-    <div id="message">YAYYYYYYYYYYY! I LOVE YOU! ❤️❤️❤️</div>
-    
+
+    <!-- Screen 3: One-month message -->
+    <div class="container hidden" id="screen3">
+        <h1>One Month Together</h1>
+        <p>It’s been an amazing month with you, and I just wanted to remind you how much you mean to me. Thank you for filling my life with love, laughter, and happiness. I can’t wait for many more months and memories with you!</p>
+        <div class="heart">&#10084;&#65039;</div>
+        <p>You’re my favorite person, and I’m so grateful to have you by my side.</p>
+    </div>
+
     <script>
-        let yesButton = document.getElementById("yes");
-        function growYes() {
-            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = (currentSize + 5) + "px";
-            yesButton.style.padding = (parseFloat(yesButton.style.padding) + 5) + "px";
-        }
-        function showLove() {
-            document.getElementById("message").style.display = "block";
-        }
+        const screen2 = document.getElementById("screen2");
+        const screen3 = document.getElementById("screen3");
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+
+        // If 'No' is clicked, enlarge the 'Yes' button
+        noBtn.onclick = function() {
+            const currentWidth = yesBtn.offsetWidth;
+            const newWidth = currentWidth * 1.1; // increase size by 10%
+            const currentHeight = yesBtn.offsetHeight;
+            const newHeight = currentHeight * 1.1; // increase height by 10%
+
+            yesBtn.style.width = `${newWidth}px`;
+            yesBtn.style.height = `${newHeight}px`;
+        };
+
+        // If 'Yes' is clicked, show the third screen with the one-month message
+        yesBtn.onclick = function() {
+            screen2.classList.add("hidden"); // Hide screen 2
+            screen3.classList.remove("hidden"); // Show screen 3
+        };
     </script>
 </body>
 </html>
